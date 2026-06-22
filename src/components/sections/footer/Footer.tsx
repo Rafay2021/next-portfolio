@@ -20,7 +20,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className='flex flex-row w-full bg-accent justify-center py-5 border-t-2 relative'>
+    <footer className='flex flex-row w-full bg-accent justify-center py-5 border-t-2 relative '>
       <small>
         &copy; {new Date().getFullYear()} Rafay Khan Portfolio. All rights
         reserved.

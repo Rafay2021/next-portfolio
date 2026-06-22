@@ -53,30 +53,55 @@ export function TypingText({ className }: { className?: string }) {
 }
 
 export default function Hero(props: React.HtmlHTMLAttributes<HTMLElement>) {
+  /* 
+  
+  
+  */
   return (
     <section
       {...props}
-      className='section hero'>
-      <div className='hero-left flex flex-col justify-center items-start gap-y-5 p-10'>
-        <TypingText className={cn('font-bold text-5xl', poppins.className)} />
-
+      className='section flex md:flex-col lg:flex-row min-h-screen'>
+      <div className='z-10 flex-1 md:relative md:bg-none md:min-h-screen md:bottom-0 lg:bg-black text-accent flex flex-col justify-center items-start gap-y-5 p-10'>
+        <TypingText
+          className={cn('font-bold md:text-5xl text-4xl', poppins.className)}
+        />
         <p className='text-2xl'>Freelance Full-Stack Developer</p>
-
-        <Button variant='outline'>
+        <Button
+          variant='outline'
+          className='text-black'>
           View Projects
           <LucideArrowBigRightDash className='h-5 w-5' />
         </Button>
       </div>
 
-      <div className='hero-right'>
+      <div className='flex-1 lg:relative'>
         <Image
           src='/rafay.png'
           alt='rafay hero Image'
           fill
-          className='hero-image'
-          loading='lazy'
+          className='object-cover'
+          loading='eager'
         />
       </div>
     </section>
+  );
+}
+
+export function HeroShape() {
+  return (
+    <svg
+      viewBox='0 0 100 100'
+      preserveAspectRatio='none'
+      className='absolute inset-0 w-full h-full border-4'>
+      <polygon
+        points='60,0 100,0 100,100 40,100'
+        className='fill-primary'
+      />
+
+      <polygon
+        points='0,0 60,0 40,100 0,100'
+        className=' fill-background'
+      />
+    </svg>
   );
 }

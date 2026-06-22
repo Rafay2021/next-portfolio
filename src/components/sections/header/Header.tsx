@@ -37,7 +37,6 @@ const navbarItems = [
 ];
 
 export default function Header() {
-  const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -49,7 +48,8 @@ export default function Header() {
         {navbarItems.map((item) => (
           <Button
             asChild
-            variant={'link'}
+            variant={'outline'}
+            className='border-2 rounded-full'
             key={item.href}>
             <Link href={item.href}>{item.children}</Link>
           </Button>
