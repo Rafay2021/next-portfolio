@@ -1,0 +1,82 @@
+'use client';
+
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { Button } from '../ui/button';
+import { Poppins } from 'next/font/google';
+import { cn } from '@/lib/utils';
+import { LucideArrowBigRightDash } from 'lucide-react';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['800'],
+});
+
+const textCollection = ['Developer', 'Engineer', 'Creator'];
+
+export function TypingText({ className }: { className?: string }) {
+  const [wordIndex, setWordIndex] = useState(0);
+  const text = textCollection[wordIndex];
+
+  const [display, setDisplay] = useState('');
+  const [index, setIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const speed = deleting ? 60 : 120;
+
+    const timer = setTimeout(() => {
+      if (!deleting) {
+        const next = index + 1;
+        setDisplay(text.slice(0, next));
+        setIndex(next);
+
+        if (next === text.length) {
+          setTimeout(() => setDeleting(true), 800);
+        }
+      } else {
+        const next = index - 1;
+        setDisplay(text.slice(0, next));
+        setIndex(next);
+
+        if (next === 0) {
+          setDeleting(false);
+          setWordIndex((prev) => (prev + 1) % textCollection.length);
+        }
+      }
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [index, deleting, text]);
+
+  return <h1 className={className}>Full Stack {display}|</h1>;
+}
+
+export default function Hero(props: React.HtmlHTMLAttributes<HTMLElement>) {
+  return (
+    <section
+      {...props}
+      className='section hero'>
+      <div className='hero-left flex flex-col justify-center items-start gap-y-5 p-10'>
+        <TypingText className={cn('font-bold text-5xl', poppins.className)} />
+
+        <p className='text-2xl'>Freelance Full-Stack Developer</p>
+
+        <Button variant='outline'>
+          View Projects
+          <LucideArrowBigRightDash className='h-5 w-5' />
+        </Button>
+      </div>
+
+      <div className='hero-right'>
+        <Image
+          src='/rafay.png'
+          alt='rafay hero Image'
+          fill
+          className='hero-image'
+          loading='lazy'
+        />
+      </div>
+    </section>
+  );
+}
